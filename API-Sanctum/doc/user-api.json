@@ -21,18 +21,24 @@
                                 "Dian": {
                                     "description": "Register user admin",
                                     "value": {
+                                        "nama_pengguna": "Dian afni",
                                         "email": "admin1@gmail.com",
                                         "password": "admin123",
-                                        "nama_pegawai": "Dian afni"
+                                        "telepon":"0829738297",
+                                        "alamat":"kotabumi"
+
                                     }
                                 }
                             },
                             "schema": {
                                 "type": "object",
                                 "required": [
+                                    "nama_pengguna",
                                     "email",
                                     "password",
-                                    "nama_pegawai"
+                                    "alamat",
+                                    "telepon"
+                                        
                                 ],
                                 "properties": {
                                     "email": {
@@ -41,7 +47,13 @@
                                     "password": {
                                         "type": "string"
                                     },
-                                    "nama_pegawai": {
+                                    "nama_pengguna": {
+                                        "type": "string"
+                                    },
+                                    "alamat": {
+                                        "type": "string"
+                                    },
+                                    "telepon": {
                                         "type": "string"
                                     }
                                 }
@@ -84,8 +96,11 @@
                                         "value": {
                                             "data": {
                                                 "id": 1,
-                                                "name": "dian afni",
-                                                "email": "admin1@gmail.com"
+                                                "nama_pengguna": "dian afni",
+                                                "email": "admin1@gmail.com",
+                                                "telepon":"0829738297",
+                                                "alamat":"kotabumi"
+                                                
                                             }
                                         }
                                     }
@@ -102,7 +117,13 @@
                                                 "email": {
                                                     "type": "string"
                                                 },
-                                                "nama_pegawai": {
+                                                "nama_pengguna": {
+                                                    "type": "string"
+                                                },
+                                                "alamat": {
+                                                    "type": "string"
+                                                },
+                                                "telepon": {
                                                     "type": "string"
                                                 }
                                             }
@@ -155,7 +176,7 @@
                                                 "email": {
                                                     "type": "string"
                                                 },
-                                                "nama_pegawai": {
+                                                "nama_pengguna": {
                                                     "type": "string"
                                                 },
                                                 "token": {

@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Resources;
+
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserResource extends JsonResource
+class MenuResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,11 +16,11 @@ class UserResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'nama_pengguna'=>$this->nama_pengguna,
-            'email'=>$this->email,
-            'telepon'=>$this->telepon,
-            'alamat'=>$this->alamat,
-            'token'=>$this->whenNotNull($this->token)
+            'nama_menu'=>$this->nama_menu,
+            'deskripsi'=>$this->deskripsi,
+            'kategori'=>$this->kategori,
+            'harga'=>$this->harga,
+            'gambar'=>$this->gambar
         ];
     }
 }
