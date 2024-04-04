@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class MenuResource extends JsonResource
+class KategoriResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,11 +16,9 @@ class MenuResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'nama_menu'=>$this->nama_menu,
-            'deskripsi'=>$this->deskripsi,
-            'kategori' => new KategoriResource($this->kategori->nama_kategori), // Memanggil resource untuk kategori
-            'harga'=>$this->harga,
-            'gambar'=>$this->gambar
+            'nama_kategori' => $this->nama_kategori,
+            'image' => $this -> image,
+            'keterangan' => $this->keterangan
         ];
     }
 }

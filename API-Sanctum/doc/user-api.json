@@ -300,7 +300,7 @@
                 "description": "Logout ",
                 "parameters": [
                     {
-                        "nama_pegawai": "Authorization",
+                        "nama_pengguna": "Authorization",
                         "in": "header"
                     }
                 ],

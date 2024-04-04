@@ -4,14 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UserLoginRequest;
 use App\Http\Requests\UserRegisterRequest;
+use App\Http\Requests\UserUpdateRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Casts\Json;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -63,5 +66,21 @@ class UserController extends Controller
         return response()->json(new UserResource($user));
     }
 
+    public function logout(Request $request): JsonResponse{
+        $user = Auth::user();
+
+        // Memastikan ada user yang sedang login sebelum menghapus token
+        if ($user) {
+            $user->tokens->each(function ($token, $key) {
+                $token->delete();
+            });
+        }
+    
+        return response()->json([
+            "data" => true
+        ])->setStatusCode(200);;
+    }
+
 
 }
+

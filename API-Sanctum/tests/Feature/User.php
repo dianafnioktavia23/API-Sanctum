@@ -90,8 +90,9 @@ class User extends TestCase
                 ]
             ]);
 
-            $user = User::where ('email','admin@gmail.com')->first();
+            $user = User::where('email', 'admin@gmail.com')->first();
             self::assertNotNull($user->token);
+            
     }
 
     public function testLoginFailed()

@@ -1,0 +1,65 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "User API",
+        "description": "User Api",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000"
+        }
+    ],
+    "/api/menu": {
+        "get": {
+            "description": "Get menu item",
+            "parameters": [
+                {
+                    "name": "Authorization",
+                    "in": "header"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "get menu item",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "data": {
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "type": "number"
+                                            },
+                                            "nama_menu": {
+                                                "type": "string"
+                                            },
+                                            "deskripsi": {
+                                                "type": "text"
+                                            },
+                                            "kategori": {
+                                                "type": "string"
+                                            },
+                                            "harga": {
+                                                "type": "decimal"
+                                            },
+                                            "gambar": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    },
+                                    "errors": {
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+}

@@ -26,7 +26,7 @@ class MenuRequest extends FormRequest
         return [
             "nama_menu"=>["required", "max:100"],
             "deskripsi"=>["required", "max:255"],
-            "kategori"=>["required", "max:100"],
+            "kategori" => ["required", "exists:kategori,nama_kategori"],
             "harga" => ["required", "numeric", "regex:/^\d+(\.\d{1,2})?$/"], // Angka dengan maksimal 2 digit di belakang koma
             "gambar" => ["required", "image"], // Gambar harus berupa file gambar
 
