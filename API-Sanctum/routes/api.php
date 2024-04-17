@@ -13,7 +13,7 @@ Route::get('/users/current', [\App\Http\Controllers\UserController::class, 'getu
 Route::delete('/users/logout', [\App\Http\Controllers\UserController::class, 'logout']);
 
 Route::get('/menu', [\App\Http\Controllers\MenuController::class, 'getmenu']);
-Route::get('/menu/{id}', [\App\Http\Controllers\MenuController::class, 'getmenu']);
+Route::get('/menu/{id}', [\App\Http\Controllers\MenuController::class, 'show']);
 
 
 

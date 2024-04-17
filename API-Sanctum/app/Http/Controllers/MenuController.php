@@ -7,32 +7,30 @@ use App\Http\Resources\MenuResource;
 use App\Models\Menu;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class MenuController extends Controller
 {
-    public function getmenu(): JsonResponse
+    public function getmenu(MenuRequest $request): JsonResponse
     {
         // Mengambil semua data menu
-        $menus = Menu::all();
+        $menu = Menu::all();
 
-        // Mengembalikan data menu dalam bentuk respons JSON
-        return response()->json($menus);
+        // Mengembalikan data menu dalam bentuk respons JSON yang ada pada menuresource
+        return response()->json(new MenuResource($menu));
     }
 
-    // //mengambil data dengan filter Id
-    // public function show($id)
-    // {
-    //     $menu = Menu::findOrFail($id);
+    public function show($id): JsonResponse
+    {
+        // Mengambil menu berdasarkan ID
+        $menu = Menu::find($id);
 
-    //     return response()->json(['data' => $menu]);
-    // }
+        // Memeriksa apakah menu ditemukan
+        if (!$menu) {
+            return response()->json(['message' => 'Menu not found'], 404);
+        }
 
-        //     public function getMenu(Request $request): MenuResource
-        // {
-        //     $menu = Menu::all();
-
-        //     return response()->json(new MenuResource($menu));
-        // }
+        // Mengembalikan data menu dalam bentuk respons JSON
+        return response()->json(new MenuResource($menu));
+    }
 
 }

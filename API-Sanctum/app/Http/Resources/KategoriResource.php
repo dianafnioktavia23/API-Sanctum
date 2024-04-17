@@ -15,10 +15,10 @@ class KategoriResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
-            'nama_kategori' => $this->nama_kategori,
-            'image' => $this -> image,
-            'keterangan' => $this->keterangan
+            // 'id' => $this->id,
+            // 'nama_kategori' => $this->nama_kategori,
+            // 'image' => $this -> image,
+            // 'keterangan' => $this->keterangan
         ];
     }
 }

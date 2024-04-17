@@ -18,7 +18,7 @@ class MenuResource extends JsonResource
             'id' => $this->id,
             'nama_menu'=>$this->nama_menu,
             'deskripsi'=>$this->deskripsi,
-            'kategori' => new KategoriResource($this->kategori->nama_kategori), // Memanggil resource untuk kategori
+            'kategori' => new KategoriResource($this->kategori), // Memanggil resource untuk kategori
             'harga'=>$this->harga,
             'gambar'=>$this->gambar
         ];
