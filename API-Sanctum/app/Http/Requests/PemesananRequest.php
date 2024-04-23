@@ -6,7 +6,8 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class MenuRequest extends FormRequest
+
+class PemesananRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,19 +25,25 @@ class MenuRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "nama_menu"=>["required", "max:100"],
-            "deskripsi"=>["required", "max:255"],
-            "kategori" => ["required", "exists:kategori,id"],
-            "harga" => ["required", "numeric", "regex:/^\d+(\.\d{1,2})?$/"], // Angka dengan maksimal 2 digit di belakang koma
-            "gambar" => ["required", "image"], // Gambar harus berupa file gambar
-
+            "nama_pengunjung"=>["required", "max:100"],
+            "meja_id" => ["required", "exists:meja,id"],
+            'menus' => 'required|array',
+            'menus.*.menu_id' => 'required|exists:menu,id',
+            'menus.*.jumlah' => 'required|integer|min:1',
+            'menus.*.subtotal' => 'required|numeric|min:0', // Angka dengan maksimal 2 digit di belakang koma
+            "tanggal_pemesanan" => ["required", "date"],
+            "status"=>["required", "max:255"],
+            "keterangan"=>["required", "max:255"],
         ];
+
     }
 
     protected function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(response([
-            "errors" =>$validator->getMessageBag()
+            "errors"=>$validator->getMessageBag()
         ], 400));
     }
+
+    
 }

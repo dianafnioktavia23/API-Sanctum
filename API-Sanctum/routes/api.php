@@ -15,6 +15,8 @@ Route::delete('/users/logout', [\App\Http\Controllers\UserController::class, 'lo
 Route::get('/menu', [\App\Http\Controllers\MenuController::class, 'getmenu']);
 Route::get('/menu/{id}', [\App\Http\Controllers\MenuController::class, 'show']);
 
+Route::post('/pemesanan', [\App\Http\Controllers\PemesananController::class, 'store']);
+Route::get('/history', [\App\Http\Controllers\PemesananController::class, 'index']);
 
 
 

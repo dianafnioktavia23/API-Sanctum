@@ -10,13 +10,13 @@ use Illuminate\Http\Request;
 
 class MenuController extends Controller
 {
-    public function getmenu(MenuRequest $request): JsonResponse
+    public function getmenu(): JsonResponse
     {
         // Mengambil semua data menu
         $menu = Menu::all();
 
         // Mengembalikan data menu dalam bentuk respons JSON yang ada pada menuresource
-        return response()->json(new MenuResource($menu));
+        return response()->json(MenuResource::collection($menu));
     }
 
     public function show($id): JsonResponse
