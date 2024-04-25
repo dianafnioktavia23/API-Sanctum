@@ -34,4 +34,9 @@ class pemesanan extends Model
     {
         return $this->hasMany(Menu::class, 'menu_id');
     }
+
+    public function detailpesanan()
+    {
+        return $this->hasMany(detailpesanan::class);
+    }
 }
