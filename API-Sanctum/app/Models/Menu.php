@@ -9,7 +9,7 @@ class Menu extends Model
 {
     protected $table ="menu";
     protected $primarykey ="id";
-    protected $keyType = "int";
+
     public $timestamps=true;
     public $incrementing = true;
 
@@ -20,4 +20,9 @@ class Menu extends Model
         'harga',
         'gambar'
     ];
+
+    public function kategori()
+    {
+        return $this->belongsTo(Kategori::class, 'id');
+    }
 }

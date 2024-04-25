@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string("nama_pengunjung");
             $table->unsignedBigInteger("meja_id")->nullable(); // Menggunakan nullable() untuk foreign key
             $table->unsignedBigInteger("menu_id")->nullable(); // Menggunakan nullable() untuk foreign key
-            $table->string("jumlah")->nullable();
-            $table->string("subtotal")->nullable();
+            $table->integer("jumlah")->nullable(); // Mengubah tipe data menjadi integer
+            $table->decimal("subtotal", 10, 2)->nullable(); // Mengubah tipe data menjadi decimal
             $table->timestamp("tanggal_pemesanan")->nullable(); // Menggunakan timestamp() tanpa argumen
             $table->enum("status", ["pending", "completed", "cancelled"])->default("pending"); // Menambahkan nilai default dan enum values
             $table->timestamps(); // Untuk created_at dan updated_at
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('pemesanan');
     }
 };

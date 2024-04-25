@@ -20,4 +20,9 @@ class Kategori extends Model
         'image',
         'keterangan'
     ];
+
+    public function menu()
+    {
+        return $this->hasMany(Menu::class);
+    }
 }

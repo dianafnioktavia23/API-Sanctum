@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Kategori;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -18,7 +19,8 @@ class MenuResource extends JsonResource
             'id' => $this->id,
             'nama_menu'=>$this->nama_menu,
             'deskripsi'=>$this->deskripsi,
-            'kategori' => new KategoriResource($this->kategori), // Memanggil resource untuk kategori
+            'kategori' => $this->kategori, // Memanggil resource untuk kategori
+            // 'o' => Kategori::select('nama_kategori')->where('id', $this->kategori)->first(), 
             'harga'=>$this->harga,
             'gambar'=>$this->gambar
         ];

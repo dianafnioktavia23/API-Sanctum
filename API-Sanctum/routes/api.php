@@ -12,10 +12,13 @@ Route::post('/users/login', [\App\Http\Controllers\UserController::class, 'login
 Route::get('/users/current', [\App\Http\Controllers\UserController::class, 'getuser']);
 Route::delete('/users/logout', [\App\Http\Controllers\UserController::class, 'logout']);
 
+
 Route::get('/menu', [\App\Http\Controllers\MenuController::class, 'getmenu']);
 Route::get('/menu/{id}', [\App\Http\Controllers\MenuController::class, 'show']);
+Route::get('/menu/kategori/{id}', [\App\Http\Controllers\MenuController::class, 'getMenuByCategory']);
 
 Route::post('/pemesanan', [\App\Http\Controllers\PemesananController::class, 'store']);
+Route::get('/pemesanan/{id}', [\App\Http\Controllers\PemesananController::class, 'details']);
 Route::get('/history', [\App\Http\Controllers\PemesananController::class, 'index']);
 
 

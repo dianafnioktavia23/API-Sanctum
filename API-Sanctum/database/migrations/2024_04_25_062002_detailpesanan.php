@@ -11,12 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('meja', function (Blueprint $table) {
+        Schema::create('detailpesanan', function (Blueprint $table) {
             $table->id();
-            $table->string("nomor_meja");
-            $table->string("kapasistas")->nullable(); // Menggunakan nullable() untuk foreign key
-            $table->enum("status", ["kosong", "terisi", "dipesan"])->default("kosong"); // Menambahkan nilai default dan enum values
+            $table->unsignedBigInteger("id_pesanan");
+            $table->unsignedBigInteger("menu_id");
+            $table->decimal("subtotal", 10, 2);
             $table->timestamps(); // Untuk created_at dan updated_at
+
+            $table->foreign("id_pesanan")->references("id")->on("pemesanan");
+            $table->foreign("menu_id")->references("id")->on("menu");
         });
     }
 

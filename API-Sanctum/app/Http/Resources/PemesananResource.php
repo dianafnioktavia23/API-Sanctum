@@ -5,6 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+
 class PemesananResource extends JsonResource
 {
     /**
@@ -17,8 +18,8 @@ class PemesananResource extends JsonResource
         return [
             'id' => $this->id,
             'nama_pengunjung'=> $this->nama_pengunjung,
-            'meja_id'=> new MejaResource($this->meja),// Memanggil resource untuk meja
-            'menu_id'=> new MenuResource($this->menu),
+            'meja_id'=> $this->meja_id,// Memanggil resource untuk meja
+            'menu_id'=> $this->menu_id,
             'jumlah'=> $this->jumlah,
             'subtotal'=> $this->subtotal,
             'tanggal_pemesanan'=> $this->tanggal_pemesanan,

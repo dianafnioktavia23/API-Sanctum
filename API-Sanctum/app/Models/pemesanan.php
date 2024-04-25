@@ -24,4 +24,14 @@ class pemesanan extends Model
         'status',
         'keterangan'
     ];
+
+    public function mejas()
+    {
+        return $this->belongsTo(meja::class, 'meja_id');
+    }
+
+    public function menus()
+    {
+        return $this->hasMany(Menu::class, 'menu_id');
+    }
 }

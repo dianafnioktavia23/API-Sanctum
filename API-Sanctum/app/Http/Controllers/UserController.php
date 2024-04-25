@@ -33,7 +33,7 @@ class UserController extends Controller
                 ]
             ], 400));
         }
-
+        //melakukan register
         $user = new User($data);
         $user->password = Hash::make($data['password']);
         $user->save();

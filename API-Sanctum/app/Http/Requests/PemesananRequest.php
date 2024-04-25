@@ -23,18 +23,18 @@ class PemesananRequest extends FormRequest
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
-    {
-        return [
-            "nama_pengunjung"=>["required", "max:100"],
-            "meja_id" => ["required", "exists:meja,id"],
-            'menus' => 'required|array',
-            'menus.*.menu_id' => 'required|exists:menu,id',
-            'menus.*.jumlah' => 'required|integer|min:1',
-            'menus.*.subtotal' => 'required|numeric|min:0', // Angka dengan maksimal 2 digit di belakang koma
-            "tanggal_pemesanan" => ["required", "date"],
-            "status"=>["required", "max:255"],
-            "keterangan"=>["required", "max:255"],
-        ];
+{
+    return [
+        "nama_pengunjung" => ["required", "max:100"],
+        "meja_id" => ["required", "exists:meja,id"],
+        'menus' => 'required|array',
+        'menus.*.menu_id' => ['required', 'exists:Menu,id'],
+        'menus.*.jumlah' => ['required', 'integer', 'min:1'],
+        'menus.*.subtotal' => ['required', 'integer', 'min:0'],
+        "tanggal_pemesanan" => ["required", "date"],
+        "status" => ["required", "max:255"],
+        "keterangan" => ["required", "max:255"],
+    ];    
 
     }
 
