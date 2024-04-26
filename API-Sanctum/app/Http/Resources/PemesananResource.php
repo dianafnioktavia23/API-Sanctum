@@ -15,17 +15,17 @@ class PemesananResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $total = $this->detailpesanan->sum('subtotal');
+
         return [
             'id' => $this->id,
-            'nama_pengunjung'=> $this->nama_pengunjung,
-            'meja_id'=> $this->meja_id,// Memanggil resource untuk meja
-            'menu_id'=> $this->menu_id,
-            'jumlah'=> $this->jumlah,
-            'subtotal'=> $this->subtotal,
-            'tanggal_pemesanan'=> $this->tanggal_pemesanan,
-            'status'=> $this->status,
-            'keterangan'=> $this->keterangan,
-            
+            'nama_pengunjung' => $this->nama_pengunjung,
+            'meja_id' => $this->meja_id,
+            'tanggal_pemesanan' => $this->tanggal_pemesanan,
+            'status' => $this->status,
+            'keterangan' => $this->keterangan,
+            'detailpesanan' => DetailPesananResource::collection($this->detailpesanan),
+            'total'=>$total,
         ];
     }
 }

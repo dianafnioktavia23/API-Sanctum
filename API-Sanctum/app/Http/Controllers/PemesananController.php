@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PemesananRequest;
 use App\Http\Resources\PemesananResource;
+use App\Models\detailpesanan;
+use App\Models\Menu;
 use App\Models\pemesanan;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\JsonResponse;
@@ -12,36 +14,22 @@ use Illuminate\Http\Request;
 
 class PemesananController extends Controller
 {
-    public function store(PemesananRequest $request): JsonResponse
-    {
-
-        // Validasi request menggunakan PemesananRequest
-        $validatedData = $request->validated();
+        public function store(PemesananRequest $request): JsonResponse
+        {
+            $validatedData = $request->validated();
     
-        // Periksa apakah pemesanan dengan meja_id dan tanggal_pemesanan yang sama sudah ada di database
-        if (pemesanan::where('meja_id', $validatedData['meja_id'])
-            ->where('tanggal_pemesanan', $validatedData['tanggal_pemesanan'])
-            ->exists()) {
-            return response()->json(['message' => 'Pemesanan untuk meja tersebut pada tanggal tersebut sudah ada.'], 400);
+            $pemesanan = pemesanan::create($validatedData);
+    
+            foreach ($request->menus as $menu) {
+                $pemesanan->detailpesanan()->create([
+                    'menu_id' => $menu['menu_id'],
+                    'subtotal' => $menu['subtotal'],
+                    'jumlah' => $menu['jumlah'],
+                ]);
+            }
+    
+            return response()->json(new PemesananResource($pemesanan));
         }
-    
-        // Buat transaksi baru menggunakan method create pada model Pemesanan
-        $transaksi = pemesanan::create($validatedData);
-    
-        // Buat pemesanan untuk setiap menu
-        foreach ($request->menus as $menu) {
-            $pemesanan = new pemesanan($validatedData);
-            $pemesanan->nama_pengunjung = $request->nama_pengunjung;
-            $pemesanan->meja_id = $request->meja_id;
-            $pemesanan->menu_id = $menu['menu_id']; // ID menu dari request
-            $pemesanan->jumlah = $menu['jumlah']; // Jumlah menu dari request
-            $pemesanan->subtotal = $menu['subtotal']; 
-            $pemesanan->save();
-        }
-    
-        // Kembalikan respons JSON dengan transaksi yang baru dibuat
-        return response()->json(new PemesananResource($transaksi), 201);
-    }
     
 
   public function details($id): JsonResponse
@@ -62,4 +50,39 @@ class PemesananController extends Controller
       // Kembalikan respons JSON dengan data pemesanan 
       return response()->json(PemesananResource::collection($pemesanan));
   }
+
+//   public function store(Request $request)
+// {
+//     // Validasi request
+//     $validatedData = $request->validate([
+//         'nama_pengunjung' => 'required|string',
+//         'meja_id' => 'required|exists:meja,id',
+//         'tanggal_pemesanan' => 'required|date',
+//         'menus' => 'required|array',
+//         'menus.*.menu_id' => 'required|exists:menu,id',
+//         'menus.*.jumlah' => 'required|integer|min:1',
+//     ]);
+
+//     // Buat pemesanan baru
+//     $pemesanan = Pemesanan::create([
+//         'nama_pengunjung' => $validatedData['nama_pengunjung'],
+//         'meja_id' => $validatedData['meja_id'],
+//         'tanggal_pemesanan' => $validatedData['tanggal_pemesanan'],
+//         'status' => 'Pending', // Atur status sesuai kebutuhan
+//         'keterangan' => '', // Atur keterangan sesuai kebutuhan
+//     ]);
+
+//     // Proses setiap menu yang dipesan
+//     foreach ($validatedData['menus'] as $menu) {
+//         // Buat detail pemesanan untuk setiap menu
+//         detailpesanan::create([
+//             'pesanan_id' => $pemesanan->id,
+//             'menu_id' => $menu['menu_id'],
+//             'jumlah' => $menu['jumlah'],
+//             'subtotal' => $menu['jumlah'] * Menu::findOrFail($menu['menu_id'])->harga,
+//         ]);
+//     }
+
+//     return response()->json(['message' => 'Pemesanan berhasil', 'data' => $pemesanan], 201);
+// }
 }

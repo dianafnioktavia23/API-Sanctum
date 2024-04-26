@@ -37,6 +37,6 @@ class pemesanan extends Model
 
     public function detailpesanan()
     {
-        return $this->hasMany(detailpesanan::class);
+        return $this->hasMany(detailpesanan::class, 'pesanan_id', 'id');
     }
 }

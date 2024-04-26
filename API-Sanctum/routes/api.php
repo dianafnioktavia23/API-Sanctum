@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ReviewController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +22,9 @@ Route::post('/pemesanan', [\App\Http\Controllers\PemesananController::class, 'st
 Route::get('/pemesanan/{id}', [\App\Http\Controllers\PemesananController::class, 'details']);
 Route::get('/history', [\App\Http\Controllers\PemesananController::class, 'index']);
 
+Route::apiResource('reviews', ReviewController::class)->only(['store']);
+Route::get('menu/{menu_id}/reviews', [ReviewController::class, 'showByMenu']);
+Route::get('/reviews', [ReviewController::class, 'showReview']);
 
 
 // Route::middleware(\App\Http\Controllers\UserController::class)->group(function(){

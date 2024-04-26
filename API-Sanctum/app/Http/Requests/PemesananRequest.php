@@ -28,9 +28,9 @@ class PemesananRequest extends FormRequest
         "nama_pengunjung" => ["required", "max:100"],
         "meja_id" => ["required", "exists:meja,id"],
         'menus' => 'required|array',
-        'menus.*.menu_id' => ['required', 'exists:Menu,id'],
-        'menus.*.jumlah' => ['required', 'integer', 'min:1'],
-        'menu.* .subtotal' => ['required', 'integer', 'min:0'],
+        'menus.*.menu_id' => ['required', 'exists:menu,id'], // Perbaikan: 'menus.*.menu_id'
+        'menus.*.jumlah' => ['required', 'integer', 'min:1'], // Tambahkan validasi jumlah
+        'menus.*.subtotal' => ['required', 'integer', 'min:0'], // Tambahkan validasi subtotal
         "tanggal_pemesanan" => ["required", "date"],
         "status" => ["required", "max:255"],
         "keterangan" => ["required", "max:255"],
