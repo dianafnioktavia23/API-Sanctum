@@ -19,6 +19,7 @@ class User extends TestCase
         ])->assertStatus(201)
             ->assertJson([
                 'data'=>[
+                    
                     'nama_pengguna' => 'dian',
                     'email'=>'admin1@gmail.com',
                     'telepon'=>'0892763821',
