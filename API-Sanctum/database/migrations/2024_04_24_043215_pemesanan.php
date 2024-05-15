@@ -21,7 +21,7 @@ return new class extends Migration
             $table->timestamp("tanggal_pemesanan")->nullable(); // Menggunakan timestamp() tanpa argumen
             $table->enum("status", ["pending", "completed", "cancelled"])->default("pending"); // Menambahkan nilai default dan enum values
             $table->timestamps(); // Untuk created_at dan updated_at
-
+            $table->string("keterangan");
             $table->foreign("meja_id")->references("id")->on("meja")->onDelete("set null"); // Menetapkan foreign key dan aksi saat penghapusan
             $table->foreign("menu_id")->references("id")->on("menu")->onDelete("set null"); // Menetapkan foreign key dan aksi saat penghapusan
         });
