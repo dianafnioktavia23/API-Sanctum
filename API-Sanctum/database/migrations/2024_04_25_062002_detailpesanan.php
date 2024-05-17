@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::create('detailpesanan', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("id_pesanan");
+            $table->unsignedBigInteger("pesanan_id");
             $table->unsignedBigInteger("menu_id");
             $table->decimal("subtotal", 10, 2);
+            $table->int("jumlah");
             $table->timestamps(); // Untuk created_at dan updated_at
 
-            $table->foreign("id_pesanan")->references("id")->on("pemesanan");
+            $table->foreign("pesanan_id")->references("id")->on("pemesanan");
             $table->foreign("menu_id")->references("id")->on("menu");
         });
     }
