@@ -34,6 +34,7 @@ class UserRegisterRequest extends FormRequest
 
     protected function failedValidation(Validator $validator)
     {
+        //Jika validasi gagal, kembalikan respons JSON dengan pesan error
         throw new HttpResponseException(response([
             "errors" =>$validator->getMessageBag()
         ], 400));

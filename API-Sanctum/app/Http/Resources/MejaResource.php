@@ -14,6 +14,7 @@ class MejaResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        //Mengembalikan array yang berisi data yang diformat
         return[
             'id' => $this->id,
             'nomor_meja' => $this->nomor_meja,

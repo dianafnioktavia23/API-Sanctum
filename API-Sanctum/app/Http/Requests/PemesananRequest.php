@@ -31,8 +31,6 @@ class PemesananRequest extends FormRequest
         'menus.*.menu_id' => ['required', 'exists:menu,id'], // Perbaikan: 'menus.*.menu_id'
         'menus.*.jumlah' => ['required', 'integer', 'min:1'], // Tambahkan validasi jumlah
         'menus.*.subtotal' => ['required', 'integer', 'min:0'], // Tambahkan validasi subtotal
-        "tanggal_pemesanan" => ["required", "date"],
-        "status" => ["required", "max:255"],
         "keterangan" => ["required", "max:255"],
     ];    
 
@@ -40,6 +38,7 @@ class PemesananRequest extends FormRequest
 
     protected function failedValidation(Validator $validator)
     {
+        // Jika validasi gagal, kembalikan respons JSON dengan pesan error
         throw new HttpResponseException(response([
             "errors"=>$validator->getMessageBag()
         ], 400));

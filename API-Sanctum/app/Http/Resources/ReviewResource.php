@@ -14,6 +14,7 @@ class ReviewResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        //Mengembalikan array yang berisi data yang diformat
         return [
             'menu_id' => $this->menu_id,
             'pesanan_id' => $this->pesanan_id,

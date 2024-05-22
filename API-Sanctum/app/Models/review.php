@@ -11,13 +11,17 @@ class review extends Model
     protected $table ="reviews";
     protected $fillable = ['menu_id', 'pesanan_id', 'comment', 'rating'];
 
+    // relasi many to many
     public function menu()
     {
+        // banyak menu memiliki banyak review
         return $this->belongsTo(Menu::class);
     }
 
+    // relasi one to many
     public function pemesanan()
     {
+        // 1 pemesanan punya banyak review
         return $this->belongsTo(pemesanan::class);
     }
 }

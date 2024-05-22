@@ -25,18 +25,24 @@ class pemesanan extends Model
         'keterangan'
     ];
 
+    //relasi one to one
     public function mejas()
     {
+        // 1 pemesanan terdiri dari 1 meja
         return $this->belongsTo(meja::class, 'meja_id');
     }
 
+    //relasi one to many
     public function menus()
     {
+        // 1 pemesanan terdiri dari banyak menu
         return $this->hasMany(Menu::class, 'menu_id');
     }
 
+    //relasi one to many
     public function detailpesanan()
     {
+        // 1 pemesanan terdiri dari banyak detail pesanan
         return $this->hasMany(detailpesanan::class, 'pesanan_id', 'id');
     }
 }

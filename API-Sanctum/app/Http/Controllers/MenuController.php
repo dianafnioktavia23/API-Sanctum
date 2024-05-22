@@ -28,6 +28,8 @@ class MenuController extends Controller
 
         // Memeriksa apakah menu ditemukan
         if (!$menu) {
+
+            // Jika menu tidak ditemukan
             return response()->json(['message' => 'Menu not found'], 404);
         }
 
@@ -37,11 +39,14 @@ class MenuController extends Controller
 
     public function getMenuByCategory($Kategori)
     {
+        // Mengambil menu berdasarkan kategori
         $menus = Menu::where('kategori', $Kategori)->get();;
         if (!$Kategori) {
+            // Jika kategori tidak ditemukan
             return abort(404);
         }
 
+        // Mengembalikan data menu dalam bentuk respons JSON
         return response()->json(MenuResource::collection($menus));
     }
 

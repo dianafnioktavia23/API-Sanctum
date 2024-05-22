@@ -15,16 +15,16 @@ class PemesananResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        //menambahkan jumlah total harga pemesanan
         $total = $this->detailpesanan->sum('subtotal');
 
+        //Mengembalikan array yang berisi data yang diformatkan
         return [
             'id' => $this->id,
             'nama_pengunjung' => $this->nama_pengunjung,
             'meja_id' => $this->meja_id,
-            'tanggal_pemesanan' => $this->tanggal_pemesanan,
-            'status' => $this->status,
-            'keterangan' => $this->keterangan,
             'detailpesanan' => DetailPesananResource::collection($this->detailpesanan),
+            'keterangan' => $this->keterangan,
             'total'=>$total,
         ];
     }

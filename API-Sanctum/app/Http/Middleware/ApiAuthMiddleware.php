@@ -17,13 +17,14 @@ class ApiAuthMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
+        // return $next($request);
         $token = $request->header('Authorization');
         $authenticate = true;
-
+            // dd($token);
         if (!$token) {
             $authenticate = false;
         }
-
+            
         $user = User::where('token', $token)->first();
         if (!$user) {
             $authenticate = false;

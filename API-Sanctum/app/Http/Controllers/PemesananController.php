@@ -16,10 +16,13 @@ class PemesananController extends Controller
 {
         public function store(PemesananRequest $request): JsonResponse
         {
+            // Validasi input data dari request POST
             $validatedData = $request->validated();
-    
+            
+            // Simpan data pemesanan ke database
             $pemesanan = pemesanan::create($validatedData);
-    
+            
+            // Simpan data detail pemesanan ke database
             foreach ($request->menus as $menu) {
                 $pemesanan->detailpesanan()->create([
                     'menu_id' => $menu['menu_id'],
@@ -27,7 +30,8 @@ class PemesananController extends Controller
                     'jumlah' => $menu['jumlah'],
                 ]);
             }
-    
+            
+            // Kembalikan respons JSON dengan data pemesanan yang baru dibuat
             return response()->json(new PemesananResource($pemesanan));
         }
     

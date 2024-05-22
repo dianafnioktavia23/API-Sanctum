@@ -13,6 +13,7 @@ class MenuRequest extends FormRequest
      */
     public function authorize(): bool
     {
+        // only allow updates if the user is logged in
         return true;
     }
 
@@ -23,6 +24,7 @@ class MenuRequest extends FormRequest
      */
     public function rules(): array
     {
+        // Tambahkan validasi 
         return [
             "nama_menu"=>["required", "max:100"],
             "deskripsi"=>["required", "max:255"],
@@ -35,6 +37,7 @@ class MenuRequest extends FormRequest
 
     protected function failedValidation(Validator $validator)
     {
+        // Jika validasi gagal, kembalikan respons JSON dengan pesan error
         throw new HttpResponseException(response([
             "errors" =>$validator->getMessageBag()
         ], 400));

@@ -15,6 +15,7 @@ class MenuResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        //Mengembalikan array yang berisi data yang diformat
         return [
             'id' => $this->id,
             'nama_menu'=>$this->nama_menu,

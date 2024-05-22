@@ -21,8 +21,10 @@ class Menu extends Model
         'gambar'
     ];
 
+    //relasi one to many , 
     public function kategori()
     {
+        // 1 kategori terdiri dari banyak menu
         return $this->belongsTo(Kategori::class, 'id');
     }
 }
