@@ -11,10 +11,10 @@ class KategoriController extends Controller
 {
     public function listkategori(): JsonResponse
     {
-        // Mengambil semua data menu
+        // Mengambil semua data kategori
         $kategori = Kategori::all();
 
-        // Mengembalikan data menu dalam bentuk respons JSON yang ada pada menuresource
+        // Mengembalikan data kategori dalam bentuk respons JSON yang ada pada kategoriresource
         return response()->json(KategoriResource::collection($kategori));
     }
 }
