@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger("kategori")->nullable(); // Menggunakan unsignedBigInteger() untuk foreign key
             $table->decimal("harga", 8, 2); // Menggunakan decimal untuk harga agar lebih sesuai dengan format uang
             $table->string("gambar")->nullable();
+            $table->string("stok");
             $table->timestamps(); // Untuk created_at dan updated_at
 
             $table->foreign("kategori")->references("id")->on("kategori")->onDelete("set null"); // Menetapkan foreign key dan aksi saat penghapusan
