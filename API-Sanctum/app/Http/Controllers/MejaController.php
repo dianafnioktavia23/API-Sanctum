@@ -17,4 +17,13 @@ class MejaController extends Controller
         // Mengembalikan data menu dalam bentuk respons JSON yang ada pada mejaresource
         return response()->json(MejaResource::collection($meja));
     }
+
+    public function mejakosong() :JsonResponse
+    {
+        $mejaKosong = Meja::where('status', 'kosong')->get();
+       
+        // Mengembalikan data menu dalam bentuk respons JSON yang ada pada mejaresource
+        return response()->json(MejaResource::collection($mejaKosong));
+    }
 }
+

@@ -32,6 +32,10 @@ Route::get('/reviews', [ReviewController::class, 'showReview']);
 //routes untuk api kategori
 Route::get('/kategori', [\App\Http\Controllers\KategoriController::class, 'listkategori']);
 
+//routes untuk api MEJA 
+Route::get('/meja', [\App\Http\Controllers\MejaController::class, 'listmeja']);
+Route::get('/meja/kosong', [\App\Http\Controllers\MejaController::class, 'mejakosong']);
+
 
 // Route::middleware(\App\Http\Controllers\UserController::class)->group(function(){
 //     Route::get('/users/current', [\App\Http\Controllers\UserController::class, 'getuser']);
