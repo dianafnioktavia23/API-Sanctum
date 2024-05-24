@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\MenuController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,6 +18,9 @@ Route::delete('/users/logout', [\App\Http\Controllers\UserController::class, 'lo
 
 //routes untuk api menu
 Route::get('/menu', [\App\Http\Controllers\MenuController::class, 'getmenu']);
+Route::get('/menu/default', [\App\Http\Controllers\MenuController::class, 'getOrderedMenu']);
+Route::get('/menu/best', [\App\Http\Controllers\MenuController::class, 'bestSeller']);
+Route::get('/menu/rekomendasi', [\App\Http\Controllers\MenuController::class, 'rekomendasi']);
 Route::get('/menu/{id}', [\App\Http\Controllers\MenuController::class, 'show']);
 Route::get('/menu/kategori/{id}', [\App\Http\Controllers\MenuController::class, 'getMenuByCategory']);
 
@@ -37,6 +42,10 @@ Route::get('/meja', [\App\Http\Controllers\MejaController::class, 'listmeja']);
 Route::get('/meja/kosong', [\App\Http\Controllers\MejaController::class, 'mejakosong']);
 
 
+//send message email
+use App\Http\Controllers\EmailController;
+
+Route::post('/send-email', [EmailController::class, 'sendEmail'])->name('send-email');
 // Route::middleware(\App\Http\Controllers\UserController::class)->group(function(){
 //     Route::get('/users/current', [\App\Http\Controllers\UserController::class, 'getuser']);
 //     Route::delete('/users/logout', [\App\Http\Controllers\UserController::class, 'logout']);

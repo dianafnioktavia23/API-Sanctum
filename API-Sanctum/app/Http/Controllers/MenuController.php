@@ -28,8 +28,6 @@ class MenuController extends Controller
 
         // Memeriksa apakah menu ditemukan
         if (!$menu) {
-
-            // Jika menu tidak ditemukan
             return response()->json(['message' => 'Menu not found'], 404);
         }
 
@@ -39,16 +37,39 @@ class MenuController extends Controller
 
     public function getMenuByCategory($Kategori)
     {
-        // Mengambil menu berdasarkan kategori
         $menus = Menu::where('kategori', $Kategori)->get();;
         if (!$Kategori) {
-            // Jika kategori tidak ditemukan
             return abort(404);
         }
 
-        // Mengembalikan data menu dalam bentuk respons JSON
         return response()->json(MenuResource::collection($menus));
     }
 
+    public function getOrderedMenu(): JsonResponse
+    {
+        $defaultMenu = Menu::orderBy('nama_menu', 'asc')->get();
+
+        if ($defaultMenu->isEmpty()) {
+            return response()->json(['message' => 'Menu not found'], 404);
+        }
+
+        return response()->json(MenuResource::collection($defaultMenu));
+    }
+
+    public function bestSeller()
+{
+    $bestSellers = Menu::withCount('pemesanan') // assuming there's a relationship between Menu and Order models
+                        ->orderBy('pemesanan_count', 'desc')
+                        ->take(10)
+                        ->get();
+
+    return response()->json(MenuResource::collection($bestSellers));
+}
+    public function rekomendasi(): JsonResponse
+    {
+        $rekomendasi = Menu::inRandomOrder()->get();
+
+        return response()->json(MenuResource::collection($rekomendasi));
+    }
 
 }

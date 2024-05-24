@@ -27,4 +27,9 @@ class Menu extends Model
         // 1 kategori terdiri dari banyak menu
         return $this->belongsTo(Kategori::class, 'id');
     }
+    public function pemesanan()
+{
+    // 1 menu terdiri dari banyak pemesanan
+    return $this->hasMany(Pemesanan::class, 'menu_id', 'id');
+}
 }
