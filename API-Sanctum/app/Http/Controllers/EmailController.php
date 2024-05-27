@@ -19,7 +19,6 @@ class EmailController extends Controller
 
         // Data email
         $details = [
-            'password' => "123456",
             'email' => $request->input('email'),
             'nama' => $request->input('nama'),
             'pesan' => $request->input('pesan'),
@@ -29,6 +28,9 @@ class EmailController extends Controller
         Mail::to($details['email'])->send(new SendEmail($details));
 
         // Respon
-        return view('contactus', compact('details'));
+        return response()->json([
+            'message' => 'Email sent successfully',
+            'data' => $details
+        ]);
     }
 }
