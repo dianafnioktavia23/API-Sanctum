@@ -2,19 +2,33 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\SendEmailRequest;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 use App\Mail\SendEmail;
+use Illuminate\Support\Facades\Mail;
 
 class EmailController extends Controller
 {
-    public function sendEmail(SendEmailRequest $request)
+    public function sendEmail(Request $request)
     {
-        $validatedData = $request->validated();
+        // Validasi input
+        $request->validate([
+            'email' => 'required|email',
+            'nama' => 'required|max:255',
+            'pesan' => 'required|max:255',
+        ]);
 
-        Mail::to($validatedData['to'])->send(new SendEmail($validatedData['message']));
+        // Data email
+        $details = [
+            'password' => "123456",
+            'email' => $request->input('email'),
+            'nama' => $request->input('nama'),
+            'pesan' => $request->input('pesan'),
+        ];
+        
+        // Mengirim email
+        Mail::to($details['email'])->send(new SendEmail($details));
 
-        return response()->json(['message' => 'Email berhasil dikirim'], 200);
+        // Respon
+        return view('contactus', compact('details'));
     }
 }

@@ -3,6 +3,7 @@
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\EmailController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -43,9 +44,9 @@ Route::get('/meja/kosong', [\App\Http\Controllers\MejaController::class, 'mejako
 
 
 //send message email
-use App\Http\Controllers\EmailController;
 
-Route::post('/send-email', [EmailController::class, 'sendEmail'])->name('send-email');
+
+Route::post('/send-email', [EmailController::class, 'sendEmail']);
 // Route::middleware(\App\Http\Controllers\UserController::class)->group(function(){
 //     Route::get('/users/current', [\App\Http\Controllers\UserController::class, 'getuser']);
 //     Route::delete('/users/logout', [\App\Http\Controllers\UserController::class, 'logout']);

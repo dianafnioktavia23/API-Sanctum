@@ -18,7 +18,8 @@ class Menu extends Model
         'deskripsi',
         'kategori',
         'harga',
-        'gambar'
+        'gambar',
+        'stok'
     ];
 
     //relasi one to many , 

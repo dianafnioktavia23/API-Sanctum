@@ -24,6 +24,7 @@ class MenuResource extends JsonResource
             'kategori' => $this->kategori, // Memanggil resource untuk kategori
             // 'o' => Kategori::select('nama_kategori')->where('id', $this->kategori)->first(), 
             'harga'=>$this->harga,
+            'stok'=>$this->stok,
             'gambar'=>$this->gambar
         ];
     }
