@@ -16,7 +16,7 @@ class KategoriResource extends JsonResource
     {
         // Mengembalikan array yang berisi data yang diformat
         return [
-            'id' => $this->id,
+            'id' => $this->id_kategori,
             'nama_kategori' => $this->nama_kategori,
             'image' => $this -> image,
         ];

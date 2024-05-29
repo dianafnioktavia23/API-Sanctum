@@ -9,7 +9,7 @@ class review extends Model
 {
     use HasFactory;
     protected $table ="reviews";
-    protected $fillable = ['menu_id', 'pesanan_id', 'comment', 'rating'];
+    protected $fillable = ['menu_id', 'pemesanan_id', 'comment', 'rating'];
 
     // relasi many to many
     public function menu()

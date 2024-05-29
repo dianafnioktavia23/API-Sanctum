@@ -16,7 +16,7 @@ class MejaResource extends JsonResource
     {
         //Mengembalikan array yang berisi data yang diformat
         return[
-            'id' => $this->id,
+            'meja_id' => $this->meja_id,
             'nomor_meja' => $this->nomor_meja,
             'kapasitas' => $this -> kapasitas,
             'status' => $this->status

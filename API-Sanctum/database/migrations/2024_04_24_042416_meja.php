@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('meja', function (Blueprint $table) {
-            $table->id();
+            $table->id("meja_id");
             $table->string("nomor_meja");
             $table->string("kapasitas")->nullable(); // Menggunakan nullable() untuk foreign key
-            $table->enum("status", ["kosong", "terisi", "dipesan"])->default("kosong"); // Menambahkan nilai default dan enum values
+            $table->enum("status", ["kosong", "terisi"])->default("kosong"); // Menambahkan nilai default dan enum values
             $table->timestamps(); // Untuk created_at dan updated_at
         });
     }

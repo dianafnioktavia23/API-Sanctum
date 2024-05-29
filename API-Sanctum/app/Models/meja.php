@@ -9,7 +9,7 @@ class meja extends Model
 {
     use HasFactory;
     protected $table ="meja";
-    protected $primarykey ="id";
+    protected $primarykey ="meja_id";
     protected $keyType = "int";
     public $timestamps=true;
     public $incrementing = true;

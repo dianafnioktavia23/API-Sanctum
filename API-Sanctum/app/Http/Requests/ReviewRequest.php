@@ -22,8 +22,8 @@ class ReviewRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "menu_id" => ['required','exists:Menu,id'],
-            "pesanan_id" =>  ['required','exists:pemesanan,id'],
+            "menu_id" => ['required','exists:Menu,menu_id'],
+            "pemesanan_id" =>  ['required','exists:pemesanan,pemesanan_id'],
             "comment" => ['required', 'string'],
             "rating" => ['required', 'integer', 'min:1', 'max:5'],
         ];

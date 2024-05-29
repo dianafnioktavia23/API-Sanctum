@@ -1,5 +1,6 @@
 <?php
 
+// app/Http/Controllers/MenuController.php
 namespace App\Http\Controllers;
 
 use App\Http\Requests\MenuRequest;
@@ -20,11 +21,10 @@ class MenuController extends Controller
         return response()->json(MenuResource::collection($menu));
     }
 
-    public function show($id): JsonResponse
+    public function show($menu_id): JsonResponse
     {
-        
         // Mengambil menu berdasarkan ID
-        $menu = Menu::find($id);
+        $menu = Menu::find($menu_id);
 
         // Memeriksa apakah menu ditemukan
         if (!$menu) {
@@ -35,11 +35,11 @@ class MenuController extends Controller
         return response()->json(new MenuResource($menu));
     }
 
-    public function getMenuByCategory($Kategori)
+    public function getMenuByCategory($kategori_id)
     {
-        $menus = Menu::where('kategori', $Kategori)->get();;
-        if (!$Kategori) {
-            return abort(404);
+        $menus = Menu::where('id_kategori', $kategori_id)->get();
+        if ($menus->isEmpty()) {
+            return response()->json(['message' => 'Menu not found'], 404);
         }
 
         return response()->json(MenuResource::collection($menus));
@@ -56,20 +56,22 @@ class MenuController extends Controller
         return response()->json(MenuResource::collection($defaultMenu));
     }
 
-    public function bestSeller()
-{
-    $bestSellers = Menu::withCount('pemesanan') // assuming there's a relationship between Menu and Order models
-                        ->orderBy('pemesanan_count', 'desc')
-                        ->take(10)
-                        ->get();
+    public function bestSeller(): JsonResponse
+    {
+        // Menghitung jumlah pemesanan untuk setiap menu dan mengurutkannya
+        $bestSellers = Menu::withCount('detailpemesanan')
+                            ->orderBy('detailpemesanan_count', 'desc')
+                            ->take(10)
+                            ->get();
 
-    return response()->json(MenuResource::collection($bestSellers));
-}
+        // Mengembalikan data dalam bentuk JSON
+        return response()->json(MenuResource::collection($bestSellers));
+    }
+
     public function rekomendasi(): JsonResponse
     {
         $rekomendasi = Menu::inRandomOrder()->get();
 
         return response()->json(MenuResource::collection($rekomendasi));
     }
-
 }

@@ -26,7 +26,7 @@ Route::get('/menu/{id}', [\App\Http\Controllers\MenuController::class, 'show']);
 Route::get('/menu/kategori/{id}', [\App\Http\Controllers\MenuController::class, 'getMenuByCategory']);
 
 //routes untuk api pemesanan
-Route::post('/pemesanan', [\App\Http\Controllers\PemesananController::class, 'store']);
+Route::post('/pemesanan', [\App\Http\Controllers\PemesananController::class, 'store']);//belom
 Route::get('/pemesanan/{id}', [\App\Http\Controllers\PemesananController::class, 'details']);
 Route::get('/history', [\App\Http\Controllers\PemesananController::class, 'index']);
 

@@ -1,5 +1,7 @@
 <?php
 
+// app/Http/Resources/DetailPemesananResource.php
+
 namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
@@ -14,9 +16,9 @@ class DetailPesananResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+
         // Mengembalikan array yang berisi data yang diformat 
         return [
-            'id' => $this->id,
             'menu_id' => $this->menu_id,
             'jumlah' => $this->jumlah,
             'subtotal' => $this->subtotal,

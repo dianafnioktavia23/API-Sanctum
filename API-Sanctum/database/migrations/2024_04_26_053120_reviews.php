@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('menu_id');
             $table->foreign('menu_id')->references('id')->on('menu')->onDelete('cascade');
-            $table->unsignedBigInteger('pesanan_id');
-            $table->foreign('pesanan_id')->references('id')->on('pemesanan')->onDelete('cascade');
+            $table->unsignedBigInteger('pemesanan_id');
+            $table->foreign('pemesanan_id')->references('id')->on('pemesanan')->onDelete('cascade');
             $table->text('comment')->nullable();
             $table->integer('rating');
             $table->timestamps();

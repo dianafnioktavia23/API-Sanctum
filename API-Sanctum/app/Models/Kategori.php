@@ -10,7 +10,7 @@ class Kategori extends Model
     use HasFactory;
     //nama table yang digunakan oleh model
     protected $table ="kategori";
-    protected $primarykey ="id";
+    protected $primarykey ="id_kategori";
     protected $keyType = "int";
     public $timestamps=true;
     public $incrementing = true;

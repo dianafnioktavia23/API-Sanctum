@@ -18,10 +18,10 @@ class MenuResource extends JsonResource
         
         //Mengembalikan array yang berisi data yang diformat
         return [
-            'id' => $this->id,
+            'id' => $this->menu_id,
             'nama_menu'=>$this->nama_menu,
             'deskripsi'=>$this->deskripsi,
-            'kategori' => $this->kategori, // Memanggil resource untuk kategori
+            'kategori' => $this->id_kategori, // Memanggil resource untuk kategori
             // 'o' => Kategori::select('nama_kategori')->where('id', $this->kategori)->first(), 
             'harga'=>$this->harga,
             'stok'=>$this->stok,

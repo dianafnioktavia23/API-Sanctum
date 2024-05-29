@@ -12,16 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('menu', function (Blueprint $table) {
-            $table->id();
+            $table->id("menu_id");
             $table->string("nama_menu");
             $table->text("deskripsi")->nullable();
-            $table->unsignedBigInteger("kategori")->nullable(); // Menggunakan unsignedBigInteger() untuk foreign key
+            $table->unsignedBigInteger("id_kategori")->nullable(); // Menggunakan unsignedBigInteger() untuk foreign key
             $table->decimal("harga", 8, 2); // Menggunakan decimal untuk harga agar lebih sesuai dengan format uang
             $table->string("gambar")->nullable();
             $table->string("stok");
             $table->timestamps(); // Untuk created_at dan updated_at
 
-            $table->foreign("kategori")->references("id")->on("kategori")->onDelete("set null"); // Menetapkan foreign key dan aksi saat penghapusan
+            $table->foreign("id_kategori")->references("id_kategori")->on("kategori")->onDelete("set null"); // Menetapkan foreign key dan aksi saat penghapusan
         });
     }
 
