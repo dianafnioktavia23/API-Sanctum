@@ -20,4 +20,16 @@ class DetailPemesanan extends Model
     {
         return $this->belongsTo(Menu::class, 'menu_id');
     }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::saving(function ($detailpemesanan) {
+            // Hitung subtotal
+            $menu = Menu::findOrFail($detailpemesanan->menu_id);
+            $subtotal = $menu->harga * $detailpemesanan->jumlah;
+            $detailpemesanan->subtotal = $subtotal;
+        });
+    }
 }

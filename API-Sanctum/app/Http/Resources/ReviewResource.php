@@ -16,8 +16,7 @@ class ReviewResource extends JsonResource
     {
         //Mengembalikan array yang berisi data yang diformat
         return [
-            'menu_id' => $this->menu_id,
-            'pemesanan_id' => $this->pemesanan_id,
+            'nama' => $this->nama,
             'comment' => $this->comment,
             'rating' => $this->rating,
         ];

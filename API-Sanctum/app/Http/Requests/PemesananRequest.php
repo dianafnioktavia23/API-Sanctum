@@ -31,7 +31,7 @@ class PemesananRequest extends FormRequest
             'menus' => ['required', 'array'],
             'menus.*.menu_id' => ['required', 'exists:menu,menu_id'],
             'menus.*.jumlah' => ['required', 'integer', 'min:1'],
-            'menus.*.subtotal' => ['required', 'numeric', 'min:0'],
+            // 'menus.*.subtotal' => ['required', 'numeric', 'min:0'],
             'keterangan' => ['required', 'max:255'],
         ];
     }

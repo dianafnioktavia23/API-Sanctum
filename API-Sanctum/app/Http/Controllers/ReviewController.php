@@ -6,8 +6,7 @@ use App\Http\Requests\ReviewRequest;
 use App\Http\Resources\ReviewResource;
 use App\Models\review;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\JsonResource;
+
 
 class ReviewController extends Controller
 {
@@ -18,19 +17,24 @@ class ReviewController extends Controller
         $validatedData = $request->validated();
 
         // Menyimpan data review
-        $review = review::create($validatedData);
+        $review = Review::create($validatedData);
 
         // Mengembalikan respons JSON dengan review yang baru dibuat
-        return response()->json(new ReviewResource($review));
+        return response()->json(new ReviewResource($review), 201);
     }
 
-    public function showByMenu($menu_id)
+    public function showById($id): JsonResponse
     {
-        // Mengambil semua review berdasarkan menu
-        $reviews = Review::where('menu_id', $menu_id)->get();
+        // Mengambil menu berdasarkan ID
+        $review = review::find($id);
 
-        // Mengembalikan respons JSON dengan daftar review
-        return response()->json(ReviewResource::collection($reviews));
+        // Memeriksa apakah menu ditemukan
+        if (!$review) {
+            return response()->json(['message' => 'REVIEW not found'], 404);
+        }
+
+        // Mengembalikan data menu dalam bentuk respons JSON
+        return response()->json(new ReviewResource($review));
     }
 
     public function showReview()

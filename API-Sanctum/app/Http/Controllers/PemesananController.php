@@ -7,6 +7,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PemesananRequest;
 use App\Http\Resources\PemesananResource;
 use App\Models\DetailPemesanan;
+use App\Models\Menu;
 use App\Models\Pemesanan;
 use Illuminate\Http\JsonResponse;
 
@@ -22,12 +23,19 @@ class PemesananController extends Controller
         
         // Simpan data detail pemesanan ke database
         foreach ($request->menus as $menu) {
+            $menudata = Menu::find($menu['menu_id']);
+            if($menudata){
             $pemesanan->detailpemesanan()->create([
                 'menu_id' => $menu['menu_id'],
-                'subtotal' => $menu['subtotal'],
+                // 'subtotal' => $menu['subtotal'],
+                'subtotal' => $menu['jumlah'] *  $menudata->harga, // menjumlahkan subtotal untuk setiap menu
                 'jumlah' => $menu['jumlah'],
             ]);
+        }else{
+            return response()->json(['error' => 'Menu item not found'], 404);
         }
+        }
+
         
         // Kembalikan respons JSON dengan data pemesanan yang baru dibuat
         return response()->json(new PemesananResource($pemesanan->load('detailpemesanan.menu')), 201);

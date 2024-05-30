@@ -32,7 +32,7 @@ Route::get('/history', [\App\Http\Controllers\PemesananController::class, 'index
 
 //routes untuk api review 
 Route::apiResource('reviews', ReviewController::class)->only(['store']);
-Route::get('menu/{menu_id}/reviews', [ReviewController::class, 'showByMenu']);
+Route::get('/reviews/{id}', [ReviewController::class, 'showById']);
 Route::get('/reviews', [ReviewController::class, 'showReview']);
 
 //routes untuk api kategori

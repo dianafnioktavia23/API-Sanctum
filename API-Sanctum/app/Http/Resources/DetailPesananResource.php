@@ -16,10 +16,10 @@ class DetailPesananResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-
+       
         // Mengembalikan array yang berisi data yang diformat 
         return [
-            'menu_id' => $this->menu_id,
+            'menu_id'  => $this->menu->nama_menu,
             'jumlah' => $this->jumlah,
             'subtotal' => $this->subtotal,
         ];
