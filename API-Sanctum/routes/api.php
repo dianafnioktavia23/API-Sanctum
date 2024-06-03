@@ -43,8 +43,7 @@ Route::get('/meja', [\App\Http\Controllers\MejaController::class, 'listmeja']);
 Route::get('/meja/kosong', [\App\Http\Controllers\MejaController::class, 'mejakosong']);
 
 
-//send message email
-
+//send message emaiL
 
 Route::post('/send-email', [EmailController::class, 'sendEmail']);
 // Route::middleware(\App\Http\Controllers\UserController::class)->group(function(){
