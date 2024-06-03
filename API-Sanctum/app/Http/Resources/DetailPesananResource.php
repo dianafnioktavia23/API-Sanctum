@@ -22,6 +22,7 @@ class DetailPesananResource extends JsonResource
             'menu_id'  => $this->menu->nama_menu,
             'jumlah' => $this->jumlah,
             'subtotal' => $this->subtotal,
+            'keterangan' => $this->keterangan,
         ];
     }
 }

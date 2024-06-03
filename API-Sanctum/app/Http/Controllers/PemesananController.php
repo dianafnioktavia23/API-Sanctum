@@ -21,21 +21,42 @@ class PemesananController extends Controller
         // Simpan data pemesanan ke database
         $pemesanan = pemesanan::create($validatedData);
         
-        // Simpan data detail pemesanan ke database
+        // Melakukan perulangan pada data menu yang dipesan
         foreach ($request->menus as $menu) {
             $menudata = Menu::find($menu['menu_id']);
-            if($menudata){
-            $pemesanan->detailpemesanan()->create([
-                'menu_id' => $menu['menu_id'],
-                // 'subtotal' => $menu['subtotal'],
-                'subtotal' => $menu['jumlah'] *  $menudata->harga, // menjumlahkan subtotal untuk setiap menu
-                'jumlah' => $menu['jumlah'],
-            ]);
-        }else{
-            return response()->json(['error' => 'Menu item not found'], 404);
-        }
-        }
 
+            // Memeriksa apakah menu ditemukan dalam database
+            if ($menudata) {
+
+                // memeriksa apakah stok menu yang dipesan melebihi stok yang tersedia
+                if ($menu['jumlah'] > $menudata->stok) {
+                    return response()->json(['error' => 'jumlah melebihi stok'], 400);
+                }
+
+                // Mengurangi jumlah stok yang dipesan
+                $menudata->stok -= $menu['jumlah'];
+                $menudata->save();
+
+                // Membuat data detail pemesanan
+                $detailData = [
+                    'menu_id' => $menu['menu_id'],
+                    'subtotal' => $menu['jumlah'] * $menudata->harga, // menjumlahkan subtotal untuk setiap menu
+                    'jumlah' => $menu['jumlah'],
+                ];
+        
+                // Jika keterangan ada dan tidak kosong, tambahkan ke detailData
+                if (!empty($menu['keterangan'])) {
+                    $detailData['keterangan'] = $menu['keterangan'];
+                }
+                 
+                //keterangan akan terbuat pada tabel detailpemesanan
+                $pemesanan->detailpemesanan()->create($detailData);
+
+            } else {
+                // Kembalikan respons JSON jika menu tidak ditemukan
+                return response()->json(['error' => 'Menu item not found'], 404);
+            }
+        }
         
         // Kembalikan respons JSON dengan data pemesanan yang baru dibuat
         return response()->json(new PemesananResource($pemesanan->load('detailpemesanan.menu')), 201);

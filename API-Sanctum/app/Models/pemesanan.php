@@ -14,7 +14,7 @@ class Pemesanan extends Model
     protected $table = 'pemesanan';
     protected $primaryKey = 'pemesanan_id';
 
-    protected $fillable = ['nama_pengunjung', 'meja_id', 'tanggal_pemesanan', 'status', 'keterangan'];
+    protected $fillable = ['nama_pengunjung', 'meja_id', 'tanggal_pemesanan', 'status',];
 
     public function detailpemesanan()
     {

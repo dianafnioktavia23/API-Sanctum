@@ -4,6 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+
 return new class extends Migration
 {
     /**
@@ -17,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger("menu_id");
             $table->decimal("subtotal", 10, 2);
             $table->int("jumlah");
+            $table->text('keterangan')->default('{}');
             $table->timestamps(); // Untuk created_at dan updated_at
 
             $table->foreign("pemesanan_id")->references("pemesanan_id")->on("pemesanan");

@@ -14,7 +14,7 @@ class DetailPemesanan extends Model
     protected $table = 'detailpemesanan';
     public $timestamps = false;
 
-    protected $fillable = ['pemesanan_id', 'menu_id', 'subtotal', 'jumlah'];
+    protected $fillable = ['pemesanan_id', 'menu_id', 'subtotal', 'jumlah', 'keterangan'];
 
     public function menu()
     {

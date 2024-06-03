@@ -25,7 +25,6 @@ class PemesananResource extends JsonResource
             'nama_pengunjung' => $this->nama_pengunjung,
             'meja_id' => $this->meja_id,
             'detailpemesanan' => DetailPesananResource::collection($this->detailpemesanan),
-            'keterangan' => $this->keterangan,
             'status' => $this->status,
             'tanggal_pemesanan' => $this->created_at,
             'total' => $total,
