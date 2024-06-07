@@ -18,8 +18,8 @@ return new class extends Migration
             $table->timestamp("tanggal_pemesanan");
             $table->enum("status", ["pending", "proses", "selesai"])->default("pending"); // Menambahkan nilai default dan enum values
             $table->timestamps(); // Menambahkan kolom created_at dan updated_at
-            $table->foreign("meja_id")->references("_meja_id")->on("meja")->onDelete("set null"); // Menetapkan foreign key dan aksi saat penghapusan
-            $table->foreign("menu_id")->references("menu_id")->on("menu")->onDelete("set null"); // Menetapkan foreign key dan aksi saat penghapusan
+            $table->foreign("meja_id")->references("meja_id")->on("meja")->onDelete("set null"); // Menetapkan foreign key dan aksi saat penghapusan
+            // $table->foreign("menu_id")->references("menu_id")->on("menu")->onDelete("set null"); // Menetapkan foreign key dan aksi saat penghapusan
         });
     }
 

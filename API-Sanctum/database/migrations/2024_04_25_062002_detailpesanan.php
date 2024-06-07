@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger("pemesanan_id");
             $table->unsignedBigInteger("menu_id");
             $table->decimal("subtotal", 10, 2);
-            $table->int("jumlah");
+            $table->integer("jumlah");
             $table->text('keterangan')->default('{}');
             $table->timestamps(); // Untuk created_at dan updated_at
 
