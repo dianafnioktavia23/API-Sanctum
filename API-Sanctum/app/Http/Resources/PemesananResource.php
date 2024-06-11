@@ -4,6 +4,7 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -26,7 +27,8 @@ class PemesananResource extends JsonResource
             'meja_id' => $this->meja_id,
             'detailpemesanan' => DetailPesananResource::collection($this->detailpemesanan),
             'status' => $this->status,
-            'tanggal_pemesanan' => $this->created_at,
+            // 'tanggal_pemesanan' => $this->created_at,
+            // 'tanggal_pemesanan' => Carbon::now()->timestamp,
             'total' => $total,
         ];
     }

@@ -9,6 +9,7 @@ use App\Http\Resources\PemesananResource;
 use App\Models\DetailPemesanan;
 use App\Models\Menu;
 use App\Models\Pemesanan;
+use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 
 class PemesananController extends Controller
@@ -17,7 +18,9 @@ class PemesananController extends Controller
     {
         // Validasi input data dari request POST
         $validatedData = $request->validated();
-        
+
+        // return response()->json($validatedData, 200);
+        $validatedData['tanggal_pemesanan'] = Carbon::now();
         // Simpan data pemesanan ke database
         $pemesanan = pemesanan::create($validatedData);
         
