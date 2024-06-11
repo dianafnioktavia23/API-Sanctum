@@ -30,7 +30,7 @@ class PemesananController extends Controller
 
                 // memeriksa apakah stok menu yang dipesan melebihi stok yang tersedia
                 if ($menu['jumlah'] > $menudata->stok) {
-                    return response()->json(['error' => 'jumlah melebihi stok'], 400);
+                    return response()->json(['error' => 'stok tidak mencukupi'], 400);
                 }
 
                 // Mengurangi jumlah stok yang dipesan
