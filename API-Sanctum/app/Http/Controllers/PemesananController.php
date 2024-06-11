@@ -55,6 +55,10 @@ class PemesananController extends Controller
                 //keterangan akan terbuat pada tabel detailpemesanan
                 $pemesanan->detailpemesanan()->create($detailData);
 
+                //mengubah status meja jika sudah dipesan  
+                $pemesanan->meja()->update(['status' => 'dipesan']);
+
+
             } else {
                 // Kembalikan respons JSON jika menu tidak ditemukan
                 return response()->json(['error' => 'Menu item not found'], 404);
