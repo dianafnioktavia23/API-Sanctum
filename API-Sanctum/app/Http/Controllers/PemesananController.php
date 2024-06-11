@@ -8,8 +8,10 @@ use App\Http\Requests\PemesananRequest;
 use App\Http\Resources\PemesananResource;
 use App\Models\DetailPemesanan;
 use App\Models\Menu;
+use App\Models\meja;
 use App\Models\Pemesanan;
 use Carbon\Carbon;
+
 use Illuminate\Http\JsonResponse;
 
 class PemesananController extends Controller
@@ -33,7 +35,7 @@ class PemesananController extends Controller
 
                 // memeriksa apakah stok menu yang dipesan melebihi stok yang tersedia
                 if ($menu['jumlah'] > $menudata->stok) {
-                    return response()->json(['error' => 'jumlah melebihi stok'], 400);
+                    return response()->json(['error' => 'stok tidak mencukupi'], 400);
                 }
 
                 // Mengurangi jumlah stok yang dipesan
@@ -56,6 +58,11 @@ class PemesananController extends Controller
                 $pemesanan->detailpemesanan()->create($detailData);
 
                 //update meja
+                //mengubah status meja jika sudah dipesan
+                // $pemesanan->meja()->update(['status' => 'dipesan'])->where('meja_id', $pemesanan->meja_id);
+                meja::where('meja_id', $request->meja_id)->update([
+                    "status" => 'dipesan'
+   ]);
 
             } else {
                 // Kembalikan respons JSON jika menu tidak ditemukan

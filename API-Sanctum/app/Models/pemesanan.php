@@ -6,6 +6,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\detailpemesanan;
 
 class Pemesanan extends Model
 {
@@ -19,5 +20,10 @@ class Pemesanan extends Model
     public function detailpemesanan()
     {
         return $this->hasMany(detailpemesanan::class, 'pemesanan_id');
+    }
+
+    public function meja()
+    {
+        return $this->belongsTo(meja::class, 'meja_id');
     }
 }
