@@ -23,7 +23,7 @@ class PemesananController extends Controller
         $validatedData['tanggal_pemesanan'] = Carbon::now();
         // Simpan data pemesanan ke database
         $pemesanan = pemesanan::create($validatedData);
-        
+
         // Melakukan perulangan pada data menu yang dipesan
         foreach ($request->menus as $menu) {
             $menudata = Menu::find($menu['menu_id']);
@@ -46,21 +46,23 @@ class PemesananController extends Controller
                     'subtotal' => $menu['jumlah'] * $menudata->harga, // menjumlahkan subtotal untuk setiap menu
                     'jumlah' => $menu['jumlah'],
                 ];
-        
+
                 // Jika keterangan ada dan tidak kosong, tambahkan ke detailData
                 if (!empty($menu['keterangan'])) {
                     $detailData['keterangan'] = $menu['keterangan'];
                 }
-                 
+
                 //keterangan akan terbuat pada tabel detailpemesanan
                 $pemesanan->detailpemesanan()->create($detailData);
+
+                //update meja
 
             } else {
                 // Kembalikan respons JSON jika menu tidak ditemukan
                 return response()->json(['error' => 'Menu item not found'], 404);
             }
         }
-        
+
         // Kembalikan respons JSON dengan data pemesanan yang baru dibuat
         return response()->json(new PemesananResource($pemesanan->load('detailpemesanan.menu')), 201);
     }
@@ -83,8 +85,8 @@ class PemesananController extends Controller
     {
         // Ambil semua data pemesanan dengan status "selesai" dari database
         $pemesanan = Pemesanan::where('status', 'selesai')->with('detailpemesanan.menu')->get();
-    
-        // Kembalikan respons JSON dengan data pemesanan 
+
+        // Kembalikan respons JSON dengan data pemesanan
         return response()->json(PemesananResource::collection($pemesanan));
     }
 }
